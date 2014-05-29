@@ -173,6 +173,11 @@ module.exports = function (grunt) {
                     _.each(test.logs, function (data) {
                         xml += '\t\t\t<' + data.type + ' type="failed" message="'
                                 + this.escape(data.message) + '">\n';
+                        // Log Actual & Expected in failure
+                        if (data.actual != "undefined" && data.expected != "undefined") {
+                            xml += '\tActual: ' + this.escape(data.actual) + '\n';
+                            xml += '\tExpected: ' + this.escape(data.expected) + '\n';
+                        }
                         if (data.stack) {
                             xml += '\t' + this.escape(data.stack) + '\n';
                         }
